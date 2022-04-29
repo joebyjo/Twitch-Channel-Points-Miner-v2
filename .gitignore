@@ -139,6 +139,7 @@ cython_debug/
 
 # PyCharm
 .idea/
+.DS_store
 
 # Custom files
 run.py
@@ -150,3 +151,6 @@ logs/*
 screenshots/*
 htmls/*
 analytics/*
+
+# my files
+.env
