@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 from os import getenv
+from dotenv import load_dotenv
 
 from TwitchChannelPointsMiner import TwitchChannelPointsMiner
 from TwitchChannelPointsMiner.logger import LoggerSettings
@@ -38,6 +39,7 @@ Discord.send = webhooksend
 utils.millify = dont_millify
 
 # environment variables
+load_dotenv()
 TWITCH_USERNAME = getenv('TWITCH_USERNAME')
 TWITCH_PWD = getenv('TWITCH_PWD')
 DISCORD_WEBHOOK = getenv("DISCORD_WEBHOOK")
