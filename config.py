@@ -1,0 +1,3 @@
+TWITCH_USERNAME = "joebyjo"
+TWITCH_PWD = "ialot#twitch"
+DISCORD_WEBHOOK = "https://discord.com/api/webhooks/964616544317485057/DSb3ktTh9shk9QiC9wq3CLS5UILmUJC1Q3gED25fWxFF-EJ6MOJIFPw16-qKGnlwwUvO"
