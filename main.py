@@ -1,7 +1,5 @@
 import logging
 from datetime import datetime
-# from os import getenv
-# from dotenv import load_dotenv
 from config import *
 
 from TwitchChannelPointsMiner import TwitchChannelPointsMiner
@@ -39,11 +37,6 @@ def dont_millify(input, precision):  # override millify in module
 Discord.send = webhooksend
 utils.millify = dont_millify
 
-# environment variables
-# load_dotenv()
-# TWITCH_USERNAME = getenv('TWITCH_USERNAME')
-# TWITCH_PWD = getenv('TWITCH_PWD')
-# DISCORD_WEBHOOK = getenv("DISCORD_WEBHOOK")
 
 twitch_miner = TwitchChannelPointsMiner(
     username=TWITCH_USERNAME,
