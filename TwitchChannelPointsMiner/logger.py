@@ -74,7 +74,7 @@ class LoggerSettings:
     def __init__(
         self,
         save: bool = True,
-        less: bool = False,
+        less=False,
         console_level: int = logging.INFO,
         file_level: int = logging.DEBUG,
         emoji: bool = platform.system() != "Windows",
@@ -176,10 +176,12 @@ def configure_loggers(username, settings):
             fmt=(
                 "%(asctime)s - %(levelname)s - [%(funcName)s]: %(message)s"
                 if settings.less is False
-                else "%(asctime)s - %(message)s"
+                else "%(asctime)s- %(message)s"
             ),
             datefmt=(
-                "%d/%m/%y %H:%M:%S" if settings.less is False else "%d/%m %H:%M:%S"
+                "%d/%m/%y %H:%M:%S" if settings.less is False else " " if settings.less == "extraless" else "%d/%m "
+                                                                                                            "%H:%M:%S "
+                # To remove time in console logs for heroku
             ),
             settings=settings,
         )
