@@ -79,7 +79,7 @@ twitch_miner = TwitchChannelPointsMiner(
         ))
 
 )
-twitch_miner.analytics(host="0.0.0.0", port=5000)
+twitch_miner.analytics(host="0.0.0.0", port=5696)
 twitch_miner.mine([
     Streamer("valorant",
              settings=StreamerSettings(make_predictions=False, follow_raid=True, claim_drops=True, watch_streak=True,
