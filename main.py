@@ -52,7 +52,7 @@ twitch_miner = TwitchChannelPointsMiner(
         discord=Discord(
             webhook_api=DISCORD_WEBHOOK,
             # Discord Webhook URL
-            events=[Events.STREAMER_ONLINE, Events.STREAMER_OFFLINE, Events.BET_WIN, Events.JOIN_RAID, Events.GAIN_FOR_WATCH]
+            events=[Events.STREAMER_ONLINE, Events.STREAMER_OFFLINE, Events.BET_GENERAL, Events.JOIN_RAID]
         )
 
     ),
