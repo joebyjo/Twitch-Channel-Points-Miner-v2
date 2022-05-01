@@ -10,3 +10,4 @@ colorama==0.4.4
 flask==2.1.1
 irc==20.0.0
 pandas==1.4.2
+gunicorn==20.1.0
