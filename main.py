@@ -48,6 +48,7 @@ twitch_miner = TwitchChannelPointsMiner(
         emoji=True,  # On Windows, we have a problem printing emoji. Set to false if you have a problem
         less="extraless",  # If you think that the logs are too verbose, set this to True,set this to "extraless" to remove datetime on console log
         colored=True,  # If you want to print colored text
+        auto_clear=True,
         discord=Discord(
             webhook_api=DISCORD_WEBHOOK,
             # Discord Webhook URL
@@ -78,7 +79,7 @@ twitch_miner = TwitchChannelPointsMiner(
         ))
 
 )
-
+twitch_miner.analytics(host="0.0.0.0", port=5000)
 twitch_miner.mine([
     Streamer("valorant",
              settings=StreamerSettings(make_predictions=False, follow_raid=True, claim_drops=True, watch_streak=True,
