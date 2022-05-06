@@ -46,13 +46,13 @@ twitch_miner = TwitchChannelPointsMiner(
         console_level=logging.INFO,  # Level of logs - use logging.DEBUG for more info
         file_level=logging.INFO,  # Level of logs - If you think the log file it's too big, use logging.INFO
         emoji=True,  # On Windows, we have a problem printing emoji. Set to false if you have a problem
-        less="extraless",  # If you think that the logs are too verbose, set this to True,set this to "extraless" to remove datetime on console log
+        less=True,  # If you think that the logs are too verbose, set this to True
         colored=True,  # If you want to print colored text
         auto_clear=True,
         discord=Discord(
             webhook_api=DISCORD_WEBHOOK,
             # Discord Webhook URL
-            events=[Events.STREAMER_ONLINE, Events.STREAMER_OFFLINE, Events.BET_GENERAL, Events.JOIN_RAID]
+            events=[Events.STREAMER_ONLINE, Events.STREAMER_OFFLINE, Events.BET_GENERAL, Events.JOIN_RAID, Events.BET_WIN]
         )
 
     ),
@@ -86,5 +86,7 @@ twitch_miner.mine([
                                        chat=ChatPresence.ONLINE)),
     "officialboaster",
     "mistic",
-    "michaelreeves"],
+    "michaelreeves",
+    "valorantesports3",
+    "valorantesports4"],
     followers=True)  # Array of streamers and followed streamers
