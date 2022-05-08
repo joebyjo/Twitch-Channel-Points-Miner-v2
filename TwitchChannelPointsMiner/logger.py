@@ -153,7 +153,7 @@ class GlobalFormatter(logging.Formatter):
             and self.settings.discord.webhook_api
             != "https://discord.com/api/webhooks/0123456789/0a1B2c3D4e5F6g7H8i9J"
         ):
-            self.settings.discord.send(record.msg, record.event)
+            self.settings.discord.send_event(record.msg, record.event)
 
 
 def configure_loggers(username, settings):

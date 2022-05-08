@@ -34,7 +34,7 @@ def dont_millify(input, precision):  # override millify in module
 
 
 # Monkey patching
-Discord.send = webhooksend
+Discord.send_event = webhooksend
 utils.millify = dont_millify
 
 
@@ -81,12 +81,11 @@ twitch_miner = TwitchChannelPointsMiner(
 )
 
 twitch_miner.mine([
-    Streamer("valorant",
-             settings=StreamerSettings(make_predictions=False, follow_raid=True, claim_drops=True, watch_streak=True,
-                                       chat=ChatPresence.ONLINE)),
+    Streamer("valorant", settings=StreamerSettings(make_predictions=False)),
     "officialboaster",
     "mistic",
     "michaelreeves",
+    "valorantesports2",
     "valorantesports3",
     "valorantesports4"],
     followers=True)  # Array of streamers and followed streamers

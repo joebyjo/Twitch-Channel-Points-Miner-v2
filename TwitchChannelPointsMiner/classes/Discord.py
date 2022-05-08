@@ -12,7 +12,7 @@ class Discord(object):
         self.webhook_api = webhook_api
         self.events = [str(e) for e in events]
 
-    def send(self, message: str, event: Events) -> None:
+    def send_event(self, message: str, event: Events) -> None:
         if str(event) in self.events:
             requests.post(
                 url=self.webhook_api,
@@ -22,3 +22,12 @@ class Discord(object):
                     "avatar_url": "https://i.imgur.com/X9fEkhT.png",
                 },
             )
+
+    @staticmethod
+    def send(msg: str, webhook):
+        payload = {
+            "content": msg,
+            "username": "Twitch Channel Points Miner",
+            "avatar_url": "https://i.imgur.com/X9fEkhT.png"
+        }
+        requests.post(url=webhook, json=payload)

@@ -389,7 +389,7 @@ class Twitch(object):
                                             )
 
                                         if Settings.logger.discord is not None:
-                                            Settings.logger.discord.send(
+                                            Settings.logger.discord.send_event(
                                                 "\n".join(drop_messages),
                                                 Events.DROP_STATUS,
                                             )

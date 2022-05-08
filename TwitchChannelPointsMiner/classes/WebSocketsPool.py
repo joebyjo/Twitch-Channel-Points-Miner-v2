@@ -337,10 +337,10 @@ class WebSocketsPool:
                                 logger.info(
                                     (
                                         f"{event_prediction} - Decision: {choice}: {decision['title']} "
-                                        f"({decision['color']}) - Result: {event_prediction.result['string']} test"
+                                        f"({decision['color']}) - Result: {event_prediction.result['string']}"
                                         if Settings.logger.less is False
                                         else
-                                        f"{event_prediction} - Decision: {decision['title']} -"
+                                        f"{event_prediction} - Decision:{decision['title']} - Result:{event_prediction.result['string']}"
                                     ),
                                     extra={
                                         "emoji": ":bar_chart:",

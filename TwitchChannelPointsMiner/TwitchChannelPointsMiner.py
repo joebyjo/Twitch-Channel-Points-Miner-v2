@@ -22,6 +22,7 @@ from TwitchChannelPointsMiner.classes.Exceptions import StreamerDoesNotExistExce
 from TwitchChannelPointsMiner.classes.Settings import FollowersOrder, Priority, Settings
 from TwitchChannelPointsMiner.classes.Twitch import Twitch
 from TwitchChannelPointsMiner.classes.WebSocketsPool import WebSocketsPool
+from TwitchChannelPointsMiner.classes.Discord import Discord
 from TwitchChannelPointsMiner.logger import LoggerSettings, configure_loggers
 from TwitchChannelPointsMiner.utils import (
     _millify,
@@ -68,16 +69,16 @@ class TwitchChannelPointsMiner:
     ]
 
     def __init__(
-        self,
-        username: str,
-        password: str = None,
-        claim_drops_startup: bool = False,
-        # Settings for logging and selenium as you can see.
-        priority: list = [Priority.STREAK, Priority.DROPS, Priority.ORDER],
-        # This settings will be global shared trought Settings class
-        logger_settings: LoggerSettings = LoggerSettings(),
-        # Default values for all streamers
-        streamer_settings: StreamerSettings = StreamerSettings(),
+            self,
+            username: str,
+            password: str = None,
+            claim_drops_startup: bool = False,
+            # Settings for logging and selenium as you can see.
+            priority: list = [Priority.STREAK, Priority.DROPS, Priority.ORDER],
+            # This settings will be global shared trought Settings class
+            logger_settings: LoggerSettings = LoggerSettings(),
+            # Default values for all streamers
+            streamer_settings: StreamerSettings = StreamerSettings(),
     ):
         Settings.analytics_path = os.path.join(Path().absolute(), "analytics", username)
         Path(Settings.analytics_path).mkdir(parents=True, exist_ok=True)
@@ -127,11 +128,11 @@ class TwitchChannelPointsMiner:
             signal.signal(sign, self.end)
 
     def analytics(
-        self,
-        host: str = "127.0.0.1",
-        port: int = 5000,
-        refresh: int = 5,
-        days_ago: int = 7,
+            self,
+            host: str = "127.0.0.1",
+            port: int = 5000,
+            refresh: int = 5,
+            days_ago: int = 7,
     ):
         http_server = AnalyticsServer(
             host=host, port=port, refresh=refresh, days_ago=days_ago
@@ -141,20 +142,20 @@ class TwitchChannelPointsMiner:
         http_server.start()
 
     def mine(
-        self,
-        streamers: list = [],
-        blacklist: list = [],
-        followers: bool = False,
-        followers_order: FollowersOrder = FollowersOrder.ASC,
+            self,
+            streamers: list = [],
+            blacklist: list = [],
+            followers: bool = False,
+            followers_order: FollowersOrder = FollowersOrder.ASC,
     ):
         self.run(streamers=streamers, blacklist=blacklist, followers=followers)
 
     def run(
-        self,
-        streamers: list = [],
-        blacklist: list = [],
-        followers: bool = False,
-        followers_order: FollowersOrder = FollowersOrder.ASC,
+            self,
+            streamers: list = [],
+            blacklist: list = [],
+            followers: bool = False,
+            followers_order: FollowersOrder = FollowersOrder.ASC,
     ):
         if self.running:
             logger.error("You can't start multiple sessions of this instance!")
@@ -249,8 +250,8 @@ class TwitchChannelPointsMiner:
             # If we have at least one streamer with settings = claim_drops True
             # Spawn a thread for sync inventory and dashboard
             if (
-                at_least_one_value_in_settings_is(self.streamers, "claim_drops", True)
-                is True
+                    at_least_one_value_in_settings_is(self.streamers, "claim_drops", True)
+                    is True
             ):
                 self.sync_campaigns_thread = threading.Thread(
                     target=self.twitch.sync_campaigns,
@@ -311,9 +312,9 @@ class TwitchChannelPointsMiner:
                 # Check if is not None because maybe we have already created a new connection on array+1 and now index is None
                 for index in range(0, len(self.ws_pool.ws)):
                     if (
-                        self.ws_pool.ws[index].is_reconneting is False
-                        and self.ws_pool.ws[index].elapsed_last_ping() > 10
-                        and internet_connection_available() is True
+                            self.ws_pool.ws[index].is_reconneting is False
+                            and self.ws_pool.ws[index].elapsed_last_ping() > 10
+                            and internet_connection_available() is True
                     ):
                         logger.info(
                             f"#{index} - The last PING was sent more than 10 minutes ago. Reconnecting to the WebSocket..."
@@ -333,8 +334,8 @@ class TwitchChannelPointsMiner:
 
         for streamer in self.streamers:
             if (
-                streamer.irc_chat is not None
-                and streamer.settings.chat != ChatPresence.NEVER
+                    streamer.irc_chat is not None
+                    and streamer.settings.chat != ChatPresence.NEVER
             ):
                 streamer.leave_chat()
                 if streamer.irc_chat.is_alive() is True:
@@ -365,6 +366,12 @@ class TwitchChannelPointsMiner:
         sys.exit(0)
 
     def __print_report(self):
+        webhook_api = Settings.logger.discord.webhook_api
+        duration = str(datetime.now() - self.start_datetime).split(".")[0]  # removing microseconds from timedelta]
+        recap = f"[1;37mEnding session:[0m {self.session_id}{chr(10)}" \
+                f"[1;37m    Uptime    :[0m {duration}{chr(10)}" \
+                f"[1;37m   Duration   :[0m {self.start_datetime.strftime('%H:%M:%S (%d/%m/%y)')} -> {datetime.now().strftime('%H:%M:%S (%d/%m/%y)')}{chr(10)}" \
+                f"{chr(10) + chr(10)}"
         print("\n")
         logger.info(
             f"Ending session: '{self.session_id}'", extra={"emoji": ":stop_sign:"}
@@ -374,7 +381,7 @@ class TwitchChannelPointsMiner:
                 f"Logs file: {self.logs_file}", extra={"emoji": ":page_facing_up:"}
             )
         logger.info(
-            f"Duration {datetime.now() - self.start_datetime}",
+            f"Duration: {duration}",
             extra={"emoji": ":hourglass:"},
         )
 
@@ -411,12 +418,19 @@ class TwitchChannelPointsMiner:
                     f"{repr(self.streamers[streamer_index])}, Total Points Gained (after farming - before farming): {_millify(gained)}"
                     if Settings.logger.less is False
                     else
-                    f"{repr(self.streamers[streamer_index])}, Total Points Gained: {_millify(gained)}"
+                    f"{str(self.streamers[streamer_index])}: Total Points Gained: {_millify(gained)}"
                     ,
                     extra={"emoji": ":robot:"},
                 )
+                recap += f"[37m{str(self.streamers[streamer_index])}: Total Points Gained: {_millify(gained)}[0m{chr(10)}"
+
                 if self.streamers[streamer_index].history != {}:
                     logger.info(
                         f"{self.streamers[streamer_index].print_history()}",
                         extra={"emoji": ":moneybag:"},
                     )
+
+                    recap += f"  [39m{self.streamers[streamer_index].print_history()}[0m{chr(10)}"
+
+        recap = "```ansi\n" + recap + "\n```"
+        Discord.send(recap, webhook_api)
