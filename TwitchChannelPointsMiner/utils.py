@@ -204,3 +204,17 @@ def check_versions():
     except Exception:
         github_version = "0.0.0"
     return current_version, github_version
+
+
+def split_webhook(recap, details, webhook):
+    from TwitchChannelPointsMiner.classes.Discord import Discord
+    payload = details
+    for i in recap:
+        if (len(i) + len(recap[i]) + len(payload) + len("```ansi\n\n```")) < 2000:
+            payload += i + recap[i]
+        else:
+            payload = "```ansi\n" + payload + "\n```"
+            Discord.send(payload, webhook)
+            payload = i + recap[i]
+    else:
+        Discord.send("```ansi\n" + payload + "\n```", webhook)

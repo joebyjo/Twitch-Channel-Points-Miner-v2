@@ -31,6 +31,7 @@ from TwitchChannelPointsMiner.utils import (
     get_user_agent,
     internet_connection_available,
     set_default_settings,
+    split_webhook
 )
 
 # Suppress:
@@ -368,10 +369,11 @@ class TwitchChannelPointsMiner:
     def __print_report(self):
         webhook_api = Settings.logger.discord.webhook_api
         duration = str(datetime.now() - self.start_datetime).split(".")[0]  # removing microseconds from timedelta]
-        recap = f"[1;37mEnding session:[0m {self.session_id}{chr(10)}" \
-                f"[1;37m    Uptime    :[0m {duration}{chr(10)}" \
-                f"[1;37m   Duration   :[0m {self.start_datetime.strftime('%H:%M:%S (%d/%m/%y)')} -> {datetime.now().strftime('%H:%M:%S (%d/%m/%y)')}{chr(10)}" \
-                f"{chr(10) + chr(10)}"
+        streamers = {}
+        details = f"[1;37m Ending session :[0m {self.session_id}{chr(10)}" \
+                  f"[1;37m     Uptime     :[0m {duration}{chr(10)}" \
+                  f"[1;37m    Duration    :[0m {self.start_datetime.strftime('%H:%M:%S (%d/%m/%y)')} -> {datetime.now().strftime('%H:%M:%S (%d/%m/%y)')}{chr(10)}" \
+                  f"{chr(10) + chr(10)}"
         print("\n")
         logger.info(
             f"Ending session: '{self.session_id}'", extra={"emoji": ":stop_sign:"}
@@ -422,7 +424,6 @@ class TwitchChannelPointsMiner:
                     ,
                     extra={"emoji": ":robot:"},
                 )
-                recap += f"[37m{str(self.streamers[streamer_index])}: Total Points Gained: {_millify(gained)}[0m{chr(10)}"
 
                 if self.streamers[streamer_index].history != {}:
                     logger.info(
@@ -430,7 +431,5 @@ class TwitchChannelPointsMiner:
                         extra={"emoji": ":moneybag:"},
                     )
 
-                    recap += f"  [39m{self.streamers[streamer_index].print_history()}[0m{chr(10)}"
-
-        recap = "```ansi\n" + recap + "\n```"
-        Discord.send(recap, webhook_api)
+                    streamers[f"[37m{str(self.streamers[streamer_index])}: Total Points Gained: {_millify(gained)}[0m{chr(10)}"] = f"  [39m{self.streamers[streamer_index].print_history()}[0m{chr(10)+chr(10)}"
+        split_webhook(streamers, details, webhook_api)
