@@ -206,7 +206,7 @@ def check_versions():
     return current_version, github_version
 
 
-def split_webhook(recap, details, webhook):
+def paginated_webhook(recap, details, webhook):
     from TwitchChannelPointsMiner.classes.Discord import Discord
     payload = details
     for i in recap:

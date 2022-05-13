@@ -31,7 +31,7 @@ from TwitchChannelPointsMiner.utils import (
     get_user_agent,
     internet_connection_available,
     set_default_settings,
-    split_webhook
+    paginated_webhook
 )
 
 # Suppress:
@@ -432,4 +432,4 @@ class TwitchChannelPointsMiner:
                     )
 
                     streamers[f"[37m{str(self.streamers[streamer_index])}: Total Points Gained: {_millify(gained)}[0m{chr(10)}"] = f"  [39m{self.streamers[streamer_index].print_history()}[0m{chr(10)+chr(10)}"
-        split_webhook(streamers, details, webhook_api)
+        paginated_webhook(streamers, details, webhook_api)
