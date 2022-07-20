@@ -68,7 +68,7 @@ twitch_miner = TwitchChannelPointsMiner(
             strategy=Strategy.SMART,  # Choose you strategy!
             percentage=5,  # Place the x% of your channel points
             percentage_gap=20,  # Gap difference between outcomesA and outcomesB (for SMART strategy)
-            max_points=5000,  # If the x percentage of your channel points is gt bet_max_points set this value
+            max_points=1000,  # If the x percentage of your channel points is gt bet_max_points set this value
             stealth_mode=True,
             # If the calculated amount of channel points is GT the highest bet, place the highest value minus 1-2 points Issue #33
             delay_mode=DelayMode.FROM_END,
@@ -80,12 +80,20 @@ twitch_miner = TwitchChannelPointsMiner(
 
 )
 
+twitch_miner.analytics(host="0.0.0.0", port=8070, refresh=5, days_ago=7)
 twitch_miner.mine([
     Streamer("valorant", settings=StreamerSettings(make_predictions=False)),
     "officialboaster",
     "mistic",
+    "alfajer",
     "michaelreeves",
     "valorantesports2",
     "valorantesports3",
-    "valorantesports4"],
+    "valorantesports4",
+    "moistcr1tikal",
+    Streamer("tarik", settings=StreamerSettings(make_predictions=False)),
+    "kyedae",
+    Streamer("shahzam", settings=StreamerSettings(make_predictions=False)),
+    "tenz",
+],
     followers=True)  # Array of streamers and followed streamers
