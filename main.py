@@ -80,7 +80,7 @@ twitch_miner = TwitchChannelPointsMiner(
 
 )
 
-twitch_miner.analytics(host="0.0.0.0", port=8070, refresh=5, days_ago=7)
+twitch_miner.analytics(host="0.0.0.0", port=9099, refresh=5, days_ago=7)
 twitch_miner.mine([
     Streamer("valorant", settings=StreamerSettings(make_predictions=False)),
     "officialboaster",

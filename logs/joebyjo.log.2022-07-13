@@ -1,0 +1,74 @@
+13/07/22 15:38:13 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [check_assets]: Assets folder not found at /Users/joebyjo/Desktop/repos/Twitch-Channel-Points-Miner-v2/assets
+13/07/22 15:38:13 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [download_assets]: Downloading assets to /Users/joebyjo/Desktop/repos/Twitch-Channel-Points-Miner-v2/assets
+13/07/22 15:38:13 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [download_assets]: Downloaded banner.png
+13/07/22 15:38:13 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [download_assets]: Downloaded charts.html
+13/07/22 15:38:14 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [download_assets]: Downloaded script.js
+13/07/22 15:38:14 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [download_assets]: Downloaded style.css
+13/07/22 15:38:14 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [download_assets]: Downloaded dark-theme.css
+13/07/22 15:38:14 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [run]: Analytics running on http://0.0.0.0:8070/
+13/07/22 15:38:14 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Start session: '046293fe-2117-4107-83ac-c1f682f1ca42'
+13/07/22 15:38:15 - ERROR - TwitchChannelPointsMiner.classes.Twitch - [post_gql_request]: Error with GQLOperations (ChannelFollows): ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+13/07/22 15:38:15 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Load 0 followers from your profile!
+13/07/22 15:38:15 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Loading data for 7 streamers. Please wait...
+13/07/22 15:38:15 - ERROR - TwitchChannelPointsMiner.classes.Twitch - [post_gql_request]: Error with GQLOperations (ReportMenuItem): ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+13/07/22 15:38:15 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Streamer valorant does not exist
+13/07/22 15:38:16 - ERROR - TwitchChannelPointsMiner.classes.Twitch - [post_gql_request]: Error with GQLOperations (ReportMenuItem): ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+13/07/22 15:38:16 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Streamer officialboaster does not exist
+13/07/22 15:38:17 - ERROR - TwitchChannelPointsMiner.classes.Twitch - [post_gql_request]: Error with GQLOperations (ReportMenuItem): ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+13/07/22 15:38:17 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Streamer mistic does not exist
+13/07/22 15:38:17 - ERROR - TwitchChannelPointsMiner.classes.Twitch - [post_gql_request]: Error with GQLOperations (ReportMenuItem): ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+13/07/22 15:38:17 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Streamer michaelreeves does not exist
+13/07/22 15:38:18 - ERROR - TwitchChannelPointsMiner.classes.Twitch - [post_gql_request]: Error with GQLOperations (ReportMenuItem): ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+13/07/22 15:38:18 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Streamer valorantesports2 does not exist
+13/07/22 15:38:19 - ERROR - TwitchChannelPointsMiner.classes.Twitch - [post_gql_request]: Error with GQLOperations (ReportMenuItem): ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+13/07/22 15:38:19 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Streamer valorantesports3 does not exist
+13/07/22 15:38:19 - ERROR - TwitchChannelPointsMiner.classes.Twitch - [post_gql_request]: Error with GQLOperations (ReportMenuItem): ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+13/07/22 15:38:19 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Streamer valorantesports4 does not exist
+13/07/22 15:38:20 - ERROR - TwitchChannelPointsMiner.classes.WebSocketsPool - [on_error]: #0 - WebSocket error: [Errno 54] Connection reset by peer
+13/07/22 15:38:20 - INFO - TwitchChannelPointsMiner.classes.WebSocketsPool - [on_close]: #0 - WebSocket closed
+13/07/22 15:38:20 - INFO - TwitchChannelPointsMiner.classes.WebSocketsPool - [handle_reconnection]: #0 - Reconnecting to Twitch PubSub server in ~60 seconds
+13/07/22 15:38:22 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [end]: CTRL+C Detected! Please wait just a moment!
+13/07/22 15:38:40 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [run]: Analytics running on http://0.0.0.0:8070/
+13/07/22 15:38:40 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Start session: '8d863441-9ef0-41ac-a220-c026fd0bfa43'
+13/07/22 15:38:40 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Load 76 followers from your profile!
+13/07/22 15:38:40 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Loading data for 76 streamers. Please wait...
+13/07/22 15:39:36 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [end]: CTRL+C Detected! Please wait just a moment!
+13/07/22 15:39:36 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Ending session: '8d863441-9ef0-41ac-a220-c026fd0bfa43'
+13/07/22 15:39:36 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Logs file: /Users/joebyjo/Desktop/repos/Twitch-Channel-Points-Miner-v2/logs/joebyjo.log
+13/07/22 15:39:36 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Duration: 0:00:56
+13/07/22 15:40:42 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [run]: Analytics running on http://0.0.0.0:8070/
+13/07/22 15:40:42 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Start session: 'cf111191-a80c-4ca9-9b35-4a1de2166fb2'
+13/07/22 15:40:43 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Load 76 followers from your profile!
+13/07/22 15:40:43 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Loading data for 76 streamers. Please wait...
+13/07/22 15:42:05 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [end]: CTRL+C Detected! Please wait just a moment!
+13/07/22 15:42:05 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Ending session: 'cf111191-a80c-4ca9-9b35-4a1de2166fb2'
+13/07/22 15:42:05 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Logs file: /Users/joebyjo/Desktop/repos/Twitch-Channel-Points-Miner-v2/logs/joebyjo.log
+13/07/22 15:42:05 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Duration: 0:01:23
+13/07/22 15:42:09 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [run]: Analytics running on http://0.0.0.0:8070/
+13/07/22 15:42:09 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Start session: 'a79057b7-aa4b-404f-914c-ec95a00c4daa'
+13/07/22 15:42:09 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Load 76 followers from your profile!
+13/07/22 15:42:09 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Loading data for 76 streamers. Please wait...
+13/07/22 15:43:34 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: valorant (212491 points) is Offline!
+13/07/22 15:43:37 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: officialboaster (30771 points) is Offline!
+13/07/22 15:43:41 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: mistic (2670 points) is Offline!
+13/07/22 15:43:44 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: michaelreeves (760 points) is Offline!
+13/07/22 15:43:46 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: valorantesports2 (63220 points) is Offline!
+13/07/22 15:43:49 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: valorantesports3 (78370 points) is Offline!
+13/07/22 15:43:51 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: valorantesports4 (23831 points) is Offline!
+13/07/22 15:43:54 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: ttvlocus (0 points) is Offline!
+13/07/22 15:43:56 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: shroud (94471 points) is Offline!
+13/07/22 15:43:59 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: thesoulreaperplays (0 points) is Offline!
+13/07/22 15:44:01 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: lilypichu (0 points) is Offline!
+13/07/22 15:44:04 - INFO - TwitchChannelPointsMiner.classes.entities.Streamer - [set_offline]: moistcr1tikal (46918 points) is Offline!
+13/07/22 15:44:04 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [end]: CTRL+C Detected! Please wait just a moment!
+13/07/22 15:44:04 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Ending session: 'a79057b7-aa4b-404f-914c-ec95a00c4daa'
+13/07/22 15:44:04 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Logs file: /Users/joebyjo/Desktop/repos/Twitch-Channel-Points-Miner-v2/logs/joebyjo.log
+13/07/22 15:44:04 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Duration: 0:01:55
+13/07/22 15:47:16 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [run]: Analytics running on http://0.0.0.0:8070/
+13/07/22 15:47:16 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Start session: '8571e162-849e-44a7-a0fd-f8d1decb51e7'
+13/07/22 15:47:17 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Load 76 followers from your profile!
+13/07/22 15:47:17 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Loading data for 76 streamers. Please wait...
+13/07/22 15:47:27 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [end]: CTRL+C Detected! Please wait just a moment!
+13/07/22 15:47:27 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Ending session: '8571e162-849e-44a7-a0fd-f8d1decb51e7'
+13/07/22 15:47:27 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Logs file: /Users/joebyjo/Desktop/repos/Twitch-Channel-Points-Miner-v2/logs/joebyjo.log
+13/07/22 15:47:27 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Duration: 0:00:10
