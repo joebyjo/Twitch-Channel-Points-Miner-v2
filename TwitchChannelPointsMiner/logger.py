@@ -179,7 +179,7 @@ def configure_loggers(username, settings):
                 else "%(asctime)s- %(message)s"
             ),
             datefmt=(
-                "%d/%m/%y %H:%M:%S" if settings.less is False else " "  # To remove time in console logs for heroku
+                "%d/%m/%y %H:%M:%S"
             ),
             settings=settings,
         )
