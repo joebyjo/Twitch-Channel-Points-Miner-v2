@@ -146,6 +146,7 @@ cython_debug/
 run.py
 chromedriver*
 test
+analytics
 
 ## Folders
 #cookies/*
