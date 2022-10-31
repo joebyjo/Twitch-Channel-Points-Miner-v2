@@ -1,3 +1,3 @@
 #!/bin/sh
-/home/joe/twitch-miner/main.py
+python /home/joe/twitch-miner/main.py
 
