@@ -176,7 +176,7 @@ def configure_loggers(username, settings):
             fmt=(
                 "%(asctime)s - %(levelname)s - [%(funcName)s]: %(message)s"
                 if settings.less is False
-                else "%(asctime)s- %(message)s"
+                else "%(asctime)s - %(message)s"
             ),
             datefmt=(
                 "%d/%m/%y %H:%M:%S"
