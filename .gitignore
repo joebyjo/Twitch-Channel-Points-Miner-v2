@@ -147,6 +147,7 @@ run.py
 chromedriver*
 test
 analytics
+python/
 
 ## Folders
 #cookies/*
