@@ -148,6 +148,7 @@ chromedriver*
 test
 analytics
 python/
+scheduler
 
 ## Folders
 #cookies/*

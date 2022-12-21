@@ -84,7 +84,6 @@ twitch_miner.analytics(host="0.0.0.0", port=9099, refresh=5, days_ago=7)
 twitch_miner.mine([
     Streamer("valorant", settings=StreamerSettings(make_predictions=False)),
     "officialboaster",
-    "mistic",
     "alfajer",
     "michaelreeves",
     "valorantesports2",
@@ -92,8 +91,10 @@ twitch_miner.mine([
     "valorantesports4",
     "moistcr1tikal",
     Streamer("tarik", settings=StreamerSettings(make_predictions=False)),
+    Streamer("kaicenat", settings=StreamerSettings(make_predictions=False)),
     "kyedae",
     Streamer("shahzam", settings=StreamerSettings(make_predictions=False)),
     "tenz",
+    "mistic",
 ],
     followers=True)  # Array of streamers and followed streamers
