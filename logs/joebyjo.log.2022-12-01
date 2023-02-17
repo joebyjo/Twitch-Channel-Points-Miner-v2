@@ -1,0 +1,6 @@
+01/12/22 11:18:55 - INFO - TwitchChannelPointsMiner.classes.AnalyticsServer - [run]: Analytics running on http://0.0.0.0:9099/
+01/12/22 11:18:55 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [run]: Start session: '01199cf2-9530-4609-a8ad-c3556c96c8d6'
+01/12/22 11:18:58 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [end]: CTRL+C Detected! Please wait just a moment!
+01/12/22 11:18:58 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Ending session: '01199cf2-9530-4609-a8ad-c3556c96c8d6'
+01/12/22 11:18:58 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Logs file: /Users/joebyjo/Desktop/repos/Twitch-Channel-Points-Miner-v2/logs/joebyjo.log
+01/12/22 11:18:58 - INFO - TwitchChannelPointsMiner.TwitchChannelPointsMiner - [__print_report]: Duration: 0:00:03
