@@ -150,9 +150,14 @@ analytics
 python/
 scheduler
 
-## Folders
-#cookies/*
-#logs/*
-#screenshots/*
-#htmls/*
-#analytics/*
+# Folders
+cookies/*
+logs/*
+screenshots/*
+htmls/*
+analytics/*
+
+# Replit
+keep_replit_alive.py
+.replit
+replit.nix

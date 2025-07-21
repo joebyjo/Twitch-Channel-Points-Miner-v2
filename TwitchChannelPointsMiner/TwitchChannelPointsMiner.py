@@ -11,7 +11,6 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
-from TwitchChannelPointsMiner.classes.AnalyticsServer import AnalyticsServer
 from TwitchChannelPointsMiner.classes.Chat import ChatPresence, ThreadChat
 from TwitchChannelPointsMiner.classes.entities.PubsubTopic import PubsubTopic
 from TwitchChannelPointsMiner.classes.entities.Streamer import (
@@ -46,6 +45,8 @@ logging.getLogger("chardet.charsetprober").setLevel(logging.ERROR)
 logging.getLogger("requests").setLevel(logging.ERROR)
 logging.getLogger("werkzeug").setLevel(logging.ERROR)
 logging.getLogger("irc.client").setLevel(logging.ERROR)
+logging.getLogger("seleniumwire").setLevel(logging.ERROR)
+logging.getLogger("websocket").setLevel(logging.ERROR)
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +56,9 @@ class TwitchChannelPointsMiner:
         "username",
         "twitch",
         "claim_drops_startup",
+        "enable_analytics",
+        "disable_ssl_cert_verification",
+        "disable_at_in_nickname",
         "priority",
         "streamers",
         "events_predictions",
@@ -70,19 +74,58 @@ class TwitchChannelPointsMiner:
     ]
 
     def __init__(
-            self,
-            username: str,
-            password: str = None,
-            claim_drops_startup: bool = False,
-            # Settings for logging and selenium as you can see.
-            priority: list = [Priority.STREAK, Priority.DROPS, Priority.ORDER],
-            # This settings will be global shared trought Settings class
-            logger_settings: LoggerSettings = LoggerSettings(),
-            # Default values for all streamers
-            streamer_settings: StreamerSettings = StreamerSettings(),
+        self,
+        username: str,
+        password: str = None,
+        claim_drops_startup: bool = False,
+        enable_analytics: bool = False,
+        disable_ssl_cert_verification: bool = False,
+        disable_at_in_nickname: bool = False,
+        # Settings for logging and selenium as you can see.
+        priority: list = [Priority.STREAK, Priority.DROPS, Priority.ORDER],
+        # This settings will be global shared trought Settings class
+        logger_settings: LoggerSettings = LoggerSettings(),
+        # Default values for all streamers
+        streamer_settings: StreamerSettings = StreamerSettings(),
     ):
-        Settings.analytics_path = os.path.join(Path().absolute(), "analytics", username)
-        Path(Settings.analytics_path).mkdir(parents=True, exist_ok=True)
+        # Fixes TypeError: 'NoneType' object is not subscriptable
+        if not username or username == "your-twitch-username":
+            logger.error("Please edit your runner file (usually run.py) and try again.")
+            logger.error("No username, exiting...")
+            sys.exit(0)
+
+        # This disables certificate verification and allows the connection to proceed, but also makes it vulnerable to man-in-the-middle (MITM) attacks.
+        Settings.disable_ssl_cert_verification = disable_ssl_cert_verification
+
+        Settings.disable_at_in_nickname = disable_at_in_nickname
+
+        import socket
+
+        def is_connected():
+            try:
+                # resolve the IP address of the Twitch.tv domain name
+                socket.gethostbyname("twitch.tv")
+                return True
+            except OSError:
+                pass
+            return False
+
+        # check for Twitch.tv connectivity every 5 seconds
+        error_printed = False
+        while not is_connected():
+            if not error_printed:
+                logger.error("Waiting for Twitch.tv connectivity...")
+                error_printed = True
+            time.sleep(5)
+
+        # Analytics switch
+        Settings.enable_analytics = enable_analytics
+
+        if enable_analytics is True:
+            Settings.analytics_path = os.path.join(
+                Path().absolute(), "analytics", username
+            )
+            Path(Settings.analytics_path).mkdir(parents=True, exist_ok=True)
 
         self.username = username
 
@@ -94,13 +137,14 @@ class TwitchChannelPointsMiner:
         streamer_settings.bet.default()
         Settings.streamer_settings = streamer_settings
 
-        user_agent = get_user_agent("FIREFOX")
+        # user_agent = get_user_agent("FIREFOX")
+        user_agent = get_user_agent("CHROME")
         self.twitch = Twitch(self.username, user_agent, password)
 
         self.claim_drops_startup = claim_drops_startup
         self.priority = priority if isinstance(priority, list) else [priority]
 
-        self.streamers = []
+        self.streamers: list[Streamer] = []
         self.events_predictions = {}
         self.minute_watcher_thread = None
         self.sync_campaigns_thread = None
@@ -117,13 +161,19 @@ class TwitchChannelPointsMiner:
 
         # Check for the latest version of the script
         current_version, github_version = check_versions()
+
+        logger.info(
+            f"Twitch Channel Points Miner v2-{current_version} (fork by rdavydov)"
+        )
+        logger.info("https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2")
+
         if github_version == "0.0.0":
             logger.error(
                 "Unable to detect if you have the latest version of this script"
             )
         elif current_version != github_version:
-            logger.info(f"You are running the version {current_version} of this script")
-            logger.info(f"The latest version on GitHub is: {github_version}")
+            logger.info(f"You are running version {current_version} of this script")
+            logger.info(f"The latest version on GitHub is {github_version}")
 
         for sign in [signal.SIGINT, signal.SIGSEGV, signal.SIGTERM]:
             signal.signal(sign, self.end)
@@ -135,12 +185,23 @@ class TwitchChannelPointsMiner:
             refresh: int = 5,
             days_ago: int = 7,
     ):
-        http_server = AnalyticsServer(
-            host=host, port=port, refresh=refresh, days_ago=days_ago
-        )
-        http_server.daemon = True
-        http_server.name = "Analytics Thread"
-        http_server.start()
+        # Analytics switch
+        if Settings.enable_analytics is True:
+            from TwitchChannelPointsMiner.classes.AnalyticsServer import AnalyticsServer
+
+            days_ago = days_ago if days_ago <= 365 * 15 else 365 * 15
+            http_server = AnalyticsServer(
+                host=host,
+                port=port,
+                refresh=refresh,
+                days_ago=days_ago,
+                username=self.username,
+            )
+            http_server.daemon = True
+            http_server.name = "Analytics Thread"
+            http_server.start()
+        else:
+            logger.error("Can't start analytics(), please set enable_analytics=True")
 
     def mine(
             self,
@@ -277,6 +338,13 @@ class TwitchChannelPointsMiner:
 
             # Subscribe to community-points-user. Get update for points spent or gains
             user_id = self.twitch.twitch_login.get_user_id()
+            # print(f"!!!!!!!!!!!!!! USER_ID: {user_id}")
+
+            # Fixes 'ERR_BADAUTH'
+            if not user_id:
+                logger.error("No user_id, exiting...")
+                self.end(0, 0)
+
             self.ws_pool.submit(
                 PubsubTopic(
                     "community-points-user-v1",
@@ -306,6 +374,16 @@ class TwitchChannelPointsMiner:
                         PubsubTopic("predictions-channel-v1", streamer=streamer)
                     )
 
+                if streamer.settings.claim_moments is True:
+                    self.ws_pool.submit(
+                        PubsubTopic("community-moments-channel-v1", streamer=streamer)
+                    )
+
+                if streamer.settings.community_goals is True:
+                    self.ws_pool.submit(
+                        PubsubTopic("community-points-channel-v1", streamer=streamer)
+                    )
+
             refresh_context = time.time()
             while self.running:
                 time.sleep(random.uniform(20, 60))
@@ -313,9 +391,9 @@ class TwitchChannelPointsMiner:
                 # Check if is not None because maybe we have already created a new connection on array+1 and now index is None
                 for index in range(0, len(self.ws_pool.ws)):
                     if (
-                            self.ws_pool.ws[index].is_reconneting is False
-                            and self.ws_pool.ws[index].elapsed_last_ping() > 10
-                            and internet_connection_available() is True
+                        self.ws_pool.ws[index].is_reconnecting is False
+                        and self.ws_pool.ws[index].elapsed_last_ping() > 10
+                        and internet_connection_available() is True
                     ):
                         logger.info(
                             f"#{index} - The last PING was sent more than 10 minutes ago. Reconnecting to the WebSocket..."
@@ -331,6 +409,9 @@ class TwitchChannelPointsMiner:
                             )
 
     def end(self, signum, frame):
+        if not self.running:
+            return
+        
         logger.info("CTRL+C Detected! Please wait just a moment!")
 
         for streamer in self.streamers:
@@ -387,7 +468,7 @@ class TwitchChannelPointsMiner:
             extra={"emoji": ":hourglass:"},
         )
 
-        if self.events_predictions != {}:
+        if not Settings.logger.less and self.events_predictions != {}:
             print("")
             for event_id in self.events_predictions:
                 event = self.events_predictions[event_id]
@@ -433,3 +514,4 @@ class TwitchChannelPointsMiner:
 
                     streamers[f"[37m{str(self.streamers[streamer_index])}: Total Points Gained: {_millify(gained)}[0m{chr(10)}"] = f"  [39m{self.streamers[streamer_index].print_history()}[0m{chr(10)+chr(10)}"
         paginated_webhook(streamers, details, webhook_api)
+                
